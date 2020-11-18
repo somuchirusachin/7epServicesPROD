@@ -1,0 +1,239 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Address Service",
+    "description": "This service is used to validate address details.",
+    "contact": {}
+  },
+  "host": "7ep-prod-api.7-eleven.com",
+  "basePath": "/address",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/validate": {
+      "put": {
+        "description": "",
+        "summary": "validateAddress",
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "validateAddress",
+        "deprecated": false,
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ValidateAddressRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateAddressResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "title": "Address",
+      "type": "object",
+      "properties": {
+        "State": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "County": {
+          "type": "string"
+        },
+        "Province": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestServiceHeader": {
+      "title": "RequestServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "ServiceRequestDate": {
+          "type": "string"
+        },
+        "SecurityHeader": {
+          "$ref": "#/definitions/SecurityHeader"
+        }
+      }
+    },
+    "SecurityHeader": {
+      "title": "SecurityHeader",
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "type": "string"
+        },
+        "ResponsibilityName": {
+          "type": "string"
+        },
+        "ResponsibilityGroupName": {
+          "type": "string"
+        },
+        "SecurityGroupName": {
+          "type": "string"
+        },
+        "Role": {
+          "type": "string"
+        },
+        "OrgId": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidateAddressRequest": {
+      "title": "ValidateAddressRequest",
+      "type": "object",
+      "properties": {
+        "RequestServiceHeader": {
+          "$ref": "#/definitions/RequestServiceHeader"
+        },
+        "Address": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        }
+      }
+    },
+    "AddressValidation": {
+      "title": "AddressValidation",
+      "type": "object",
+      "properties": {
+        "ValidFlag": {
+          "type": "boolean"
+        },
+        "Address": {
+          "$ref": "#/definitions/Address"
+        }
+      }
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "SubSystem": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Details": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseServiceHeader": {
+      "title": "ResponseServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "ServiceResponseDate": {
+          "type": "string"
+        },
+        "OperationStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidateAddressResponse": {
+      "title": "ValidateAddressResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "AddressValidation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressValidation"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "address-controller",
+      "description": ""
+    }
+  ]
+}
