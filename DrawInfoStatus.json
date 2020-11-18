@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Draw Info Status Service",
+    "description": "This is Draw Info Status Service under Enterprise Service Layer Initiatives by 7-Eleven",
+    "contact": {}
+  },
+  "host": "7ep-test-api.7-eleven.com",
+  "basePath": "/drawinfostatus",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/{requestId}/{storeNumber}/{supplierNumber}": {
+      "get": {
+        "description": "",
+        "summary": "getDrawInfoStatus",
+        "tags": [
+          "draw-info-status-controller"
+        ],
+        "operationId": "getDrawInfoStatus",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "storeNumber",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "supplierNumber",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DrawInfoStatusResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DrawInfoStatus": {
+      "title": "DrawInfoStatus",
+      "type": "object",
+      "properties": {
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "Store": {
+          "type": "string"
+        },
+        "DrawType": {
+          "type": "string"
+        },
+        "TransactionID": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "string"
+        },
+        "RequestedDate": {
+          "type": "string"
+        },
+        "DatePaid": {
+          "type": "string"
+        },
+        "PaymentHistoryStatus": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "DrawInfoStatusResponse": {
+      "title": "DrawInfoStatusResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "DrawInfoStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DrawInfoStatus"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseServiceHeader": {
+      "title": "ResponseServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "draw-info-status-controller",
+      "description": ""
+    }
+  ]
+} 
