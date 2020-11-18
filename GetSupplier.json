@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Get Supplier Data Service API",
+    "description": "This is Get Supplier Data Service under Enterprise Service Layer Data Initiatives by 7-Eleven",
+    "contact": {}
+  },
+  "host": "7ep-test-api.7-eleven.com",
+  "basePath": "/supplierdata",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/supplier": {
+      "get": {
+        "description": "",
+        "summary": "getSupplierDetails",
+        "tags": [
+          "supplier-controller"
+        ],
+        "operationId": "getSupplierDetails",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "displayName",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "schema": {
+              "$ref": "#/definitions/GetSupplierResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetSupplierResp": {
+      "title": "GetSupplierResp",
+      "type": "object",
+      "properties": {
+        "storeNumber": {
+          "type": "string"
+        },
+        "storeSuffix": {
+          "type": "string"
+        },
+        "supplierID": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "MailId": {
+          "type": "string"
+        },
+        "PrincipalName": {
+          "type": "string"
+        }
+      }
+    },
+    "GetSupplierResponse": {
+      "title": "GetSupplierResponse",
+      "type": "object",
+      "properties": {
+        "GetSupplierResp": {
+          "$ref": "#/definitions/GetSupplierResp"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "supplier-controller",
+      "description": "Get Supplier"
+    }
+  ]
+}
