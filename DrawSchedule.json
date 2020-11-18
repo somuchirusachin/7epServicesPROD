@@ -6,7 +6,7 @@
     "description": "This is DrawsSchedule Data Service under Enterprise Service Layer Data Initiatives by 7-Eleven",
     "contact": {}
   },
-  "host": "7ep-test-api.7-eleven.com",
+  "host": "7ep-prod-api.7-eleven.com",
   "basePath": "/drawschedule",
   "securityDefinitions": {
     "Subscription-Key": {
