@@ -1,0 +1,378 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "DrawsSchedule Data Service API",
+    "description": "This is DrawsSchedule Data Service under Enterprise Service Layer Data Initiatives by 7-Eleven",
+    "contact": {}
+  },
+  "host": "7ep-test-api.7-eleven.com",
+  "basePath": "/drawschedule",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/{requestId}/{supplierNumber}/{store}": {
+      "get": {
+        "description": "",
+        "summary": "getDrawScheduleDetails",
+        "tags": [
+          "draw-schedule-controller"
+        ],
+        "operationId": "getDrawScheduleDetails",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "supplierNumber",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "store",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "schema": {
+              "$ref": "#/definitions/DrawQueryResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/drawschedule": {
+      "post": {
+        "description": "",
+        "summary": "updateDrawSchedule",
+        "tags": [
+          "draw-schedule-controller"
+        ],
+        "operationId": "updateDrawSchedule",
+        "deprecated": false,
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DrawScheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "schema": {
+              "$ref": "#/definitions/UpdateScheduleResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DrawQueryInfo": {
+      "title": "DrawQueryInfo",
+      "type": "object",
+      "properties": {
+        "OracleSeqNo": {
+          "type": "string"
+        },
+        "OperationType": {
+          "type": "string"
+        },
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "Store": {
+          "type": "string"
+        },
+        "AvailableToDraw": {
+          "type": "string"
+        },
+        "DrawType": {
+          "type": "string"
+        },
+        "CalculationType": {
+          "type": "string"
+        },
+        "BankName": {
+          "type": "string"
+        },
+        "AccountNickName": {
+          "type": "string"
+        },
+        "BankAccountNumber": {
+          "type": "string"
+        },
+        "EXT_BANK_ACCOUNT_ID": {
+          "type": "string"
+        },
+        "RequestedDrawAmount": {
+          "type": "string"
+        },
+        "RequestedDate": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "EndDate": {
+          "type": "string"
+        }
+      }
+    },
+    "DrawQueryResponse": {
+      "title": "DrawQueryResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/Header"
+        },
+        "DrawSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DrawQueryInfo"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "SubSystem": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Details": {
+          "type": "string"
+        }
+      }
+    },
+    "Header": {
+      "title": "Header",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "OperationStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "DrawScheduleRequest": {
+      "title": "DrawScheduleRequest",
+      "type": "object",
+      "properties": {
+        "DrawSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateSchedule"
+          }
+        },
+        "RequestServiceHeader": {
+          "$ref": "#/definitions/UpdateHeader"
+        }
+      }
+    },
+    "SecurityHeaderUpdate": {
+      "title": "SecurityHeaderUpdate",
+      "type": "object",
+      "properties": {
+        "OrgId": {
+          "type": "string"
+        },
+        "ResponsibilityGroupName": {
+          "type": "string"
+        },
+        "ResponsibilityName": {
+          "type": "string"
+        },
+        "Role": {
+          "type": "string"
+        },
+        "SecurityGroupName": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateHeader": {
+      "title": "UpdateHeader",
+      "type": "object",
+      "properties": {
+        "ApplicationId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "RequestId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "SecurityHeader": {
+          "$ref": "#/definitions/SecurityHeaderUpdate"
+        },
+        "ServiceResponseDate": {
+          "type": "string"
+        },
+        "OperationStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateSchedule": {
+      "title": "UpdateSchedule",
+      "type": "object",
+      "properties": {
+        "OracleSeqNo": {
+          "type": "string"
+        },
+        "OperationType": {
+          "type": "string"
+        },
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "Store": {
+          "type": "string"
+        },
+        "AvailableToDraw": {
+          "type": "string"
+        },
+        "DrawType": {
+          "type": "string"
+        },
+        "CalculationType": {
+          "type": "string"
+        },
+        "BankName": {
+          "type": "string"
+        },
+        "AccountNickName": {
+          "type": "string"
+        },
+        "BankAccountNumber": {
+          "type": "string"
+        },
+        "EXT_BANK_ACCOUNT_ID": {
+          "type": "string"
+        },
+        "RequestedDrawAmount": {
+          "type": "string"
+        },
+        "RequestedDate": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "EndDate": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateScheduleResponse": {
+      "title": "UpdateScheduleResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/UpdateHeader"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "OracleSeqNo": {
+          "type": "string"
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "draw-schedule-controller",
+      "description": ""
+    }
+  ]
+}
