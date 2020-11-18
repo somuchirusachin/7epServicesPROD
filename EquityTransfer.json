@@ -1,0 +1,451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Equity Transfer Service",
+    "description": "This is Equity Transfer Service under Enterprise Service Layer Initiatives by 7-Eleven",
+    "contact": {}
+  },
+  "host": "7ep-test-api.7-eleven.com",
+  "basePath": "/equitytransfer",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/{RequestId}/{SupplierNumber}/{FromStore}": {
+      "get": {
+        "description": "",
+        "summary": "getEquityTransfer",
+        "tags": [
+          "equity-transfer-controller"
+        ],
+        "operationId": "getEquityTransfer",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "SupplierNumber",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "FromStore",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EquityTransferResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/v1/equityTransfer": {
+      "post": {
+        "description": "",
+        "summary": "updateEquityTransfer",
+        "tags": [
+          "equity-transfer-controller"
+        ],
+        "operationId": "updateEquityTransfer",
+        "deprecated": false,
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EquityTransferRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EquityTransferUpdateResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/v1/drawEquity": {
+      "post": {
+        "description": "",
+        "summary": "drawEquityUpdate",
+        "tags": [
+          "equity-transfer-controller"
+        ],
+        "operationId": "drawEquityUpdate",
+        "deprecated": false,
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DrawEquityEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DrawEquityResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EquityTransfer": {
+      "title": "EquityTransfer",
+      "type": "object",
+      "properties": {
+        "OperationType": {
+          "type": "string"
+        },
+        "FromStore": {
+          "type": "string"
+        },
+        "ToStore": {
+          "type": "string"
+        },
+        "AvailableToDraw": {
+          "type": "string"
+        },
+        "TransferAmount": {
+          "type": "string"
+        },
+        "RequestDate": {
+          "type": "string"
+        },
+        "DateTransfered": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "EquityTransferList": {
+      "title": "EquityTransferList",
+      "type": "object",
+      "properties": {
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "EquityTransfer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EquityTransfer"
+          }
+        }
+      }
+    },
+    "EquityTransferResponse": {
+      "title": "EquityTransferResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "EquityTransfer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EquityTransferList"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        }
+      }
+    },
+    "ErrorEntity": {
+      "title": "ErrorEntity",
+      "type": "object",
+      "properties": {
+        "SubSystem": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Details": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseServiceHeader": {
+      "title": "ResponseServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "ServiceResponseDate": {
+          "type": "string"
+        },
+        "OperationStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "EquityTransferRequest": {
+      "title": "EquityTransferRequest",
+      "type": "object",
+      "properties": {
+        "RequestServiceHeader": {
+          "$ref": "#/definitions/RequestServiceHeader"
+        },
+        "Supplier": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Supplier"
+          }
+        }
+      }
+    },
+    "RequestServiceHeader": {
+      "title": "RequestServiceHeader",
+      "type": "object",
+      "properties": {
+        "ApplicationId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "RequestId": {
+          "type": "string"
+        },
+        "SecurityHeader": {
+          "$ref": "#/definitions/SecurityHeader"
+        },
+        "ServiceRequestDate": {
+          "type": "string"
+        }
+      }
+    },
+    "SecurityHeader": {
+      "title": "SecurityHeader",
+      "type": "object",
+      "properties": {
+        "OrgId": {
+          "type": "string"
+        },
+        "ResponsibilityGroupName": {
+          "type": "string"
+        },
+        "ResponsibilityName": {
+          "type": "string"
+        },
+        "Role": {
+          "type": "string"
+        },
+        "SecurityGroupName": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        }
+      }
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "type": "object",
+      "properties": {
+        "EquityTransfer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateEquityTransfer"
+          }
+        },
+        "SupplierNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateEquityTransfer": {
+      "title": "UpdateEquityTransfer",
+      "type": "object",
+      "properties": {
+        "OperationType": {
+          "type": "string"
+        },
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "FromStore": {
+          "type": "string"
+        },
+        "ToStore": {
+          "type": "string"
+        },
+        "RequestId": {
+          "type": "string"
+        },
+        "AvailableToDraw": {
+          "type": "string"
+        },
+        "TransferAmount": {
+          "type": "string"
+        },
+        "RequestDate": {
+          "type": "string"
+        },
+        "DateTransfered": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "EquityTransferUpdateResponse": {
+      "title": "EquityTransferUpdateResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "Status": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        }
+      }
+    },
+    "DrawEquityEntity": {
+      "title": "DrawEquityEntity",
+      "type": "object",
+      "properties": {
+        "DRAW_REQUEST_ID": {
+          "type": "string"
+        },
+        "OPERATION_TYPE": {
+          "type": "string"
+        },
+        "PAID_IN_AMOUNT": {
+          "type": "string"
+        },
+        "PAID_IN_DATE": {
+          "type": "string"
+        },
+        "PAID_IN_EXT_BANK_ID": {
+          "type": "string"
+        },
+        "PAID_IN_REASON": {
+          "type": "string"
+        },
+        "PAID_IN_STATUS": {
+          "type": "string"
+        },
+        "STORE_NUMBER": {
+          "type": "string"
+        },
+        "SUPPLIER_NUMBER": {
+          "type": "string"
+        }
+      }
+    },
+    "DrawEquityResponse": {
+      "title": "DrawEquityResponse",
+      "type": "object",
+      "properties": {
+        "STATUS_CODE": {
+          "type": "string"
+        },
+        "STATUS_DESC": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "equity-transfer-controller",
+      "description": "Equity Transfer Controller"
+    }
+  ]
+}
