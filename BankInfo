@@ -1,0 +1,529 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Bank Info Service",
+    "description": "This service exposes API to get or update supplier's bank info from EBS database",
+    "contact": {}
+  },
+  "host": "7ep-test-api.7-eleven.com",
+  "basePath": "/bank-info",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/bank-info": {
+      "get": {
+        "description": "",
+        "summary": "queryBankInfo",
+        "tags": [
+          "bank-info-controller"
+        ],
+        "operationId": "queryBankInfo",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "SupplierNumber",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BankInfoResponse"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "summary": "updateBankDetails",
+        "tags": [
+          "bank-info-controller"
+        ],
+        "operationId": "updateBankDetails",
+        "deprecated": false,
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BankInfoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateBankInfoResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BankAccountInfo": {
+      "title": "BankAccountInfo",
+      "type": "object",
+      "properties": {
+        "SupplierNumber": {
+          "type": "string"
+        },
+        "SupplierName": {
+          "type": "string"
+        },
+        "BankInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BankInfo"
+          }
+        }
+      }
+    },
+    "BankInfo": {
+      "title": "BankInfo",
+      "type": "object",
+      "properties": {
+        "Country": {
+          "type": "string"
+        },
+        "BankName": {
+          "type": "string"
+        },
+        "BankNumber": {
+          "type": "string"
+        },
+        "BranchName": {
+          "type": "string"
+        },
+        "RoutingNumber": {
+          "type": "string"
+        },
+        "BranchType": {
+          "type": "string"
+        },
+        "AccountNumber": {
+          "type": "string"
+        },
+        "AccountType": {
+          "type": "string"
+        },
+        "PayGroup": {
+          "type": "string"
+        },
+        "AccountName": {
+          "type": "string"
+        },
+        "Currency": {
+          "type": "string"
+        },
+        "AllowInternationalPayments": {
+          "type": "string"
+        },
+        "StartDate": {
+          "type": "string"
+        },
+        "EndDate": {
+          "type": "string"
+        },
+        "InternalOrganization": {
+          "type": "string"
+        },
+        "Priority": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "BRANCH_ID": {
+          "type": "string"
+        },
+        "BANK_ID": {
+          "type": "string"
+        },
+        "PARTY_ID": {
+          "type": "string"
+        },
+        "VENDOR_ID": {
+          "type": "string"
+        },
+        "EXT_BANK_ACCOUNT_ID": {
+          "type": "string"
+        },
+        "TEN_CENT_TEST": {
+          "type": "string"
+        }
+      }
+    },
+    "BankInfoResponse": {
+      "title": "BankInfoResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "BankAccount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BankAccountInfo"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorCode"
+          }
+        }
+      }
+    },
+    "ErrorCode": {
+      "title": "ErrorCode",
+      "type": "object",
+      "properties": {
+        "SubSystem": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Details": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseServiceHeader": {
+      "title": "ResponseServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "ServiceResponseDate": {
+          "type": "string"
+        },
+        "OperationStatus": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "RequestId"
+      ]
+    },
+    "BankInfoRequest": {
+      "title": "BankInfoRequest",
+      "type": "object",
+      "properties": {
+        "RequestServiceHeader": {
+          "$ref": "#/definitions/RequestServiceHeader"
+        },
+        "Supplier": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Supplier"
+          }
+        }
+      }
+    },
+    "RequestServiceHeader": {
+      "title": "RequestServiceHeader",
+      "type": "object",
+      "properties": {
+        "ApplicationId": {
+          "type": "string"
+        },
+        "LanguageCode": {
+          "type": "string"
+        },
+        "RequestId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "ServiceRequestDate": {
+          "type": "string"
+        },
+        "SecurityHeader": {
+          "$ref": "#/definitions/SecurityHeader"
+        }
+      }
+    },
+    "SecurityHeader": {
+      "title": "SecurityHeader",
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "type": "string"
+        },
+        "ResponsibilityName": {
+          "type": "string"
+        },
+        "ResponsibilityGroupName": {
+          "type": "string"
+        },
+        "SecurityGroupName": {
+          "type": "string"
+        },
+        "Role": {
+          "type": "string"
+        },
+        "OrgId": {
+          "type": "string"
+        }
+      }
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "type": "object",
+      "properties": {
+        "BankInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateBankInfo"
+          }
+        },
+        "SupplierName": {
+          "type": "string"
+        },
+        "SupplierNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateBankInfo": {
+      "title": "UpdateBankInfo",
+      "type": "object",
+      "properties": {
+        "AccountName": {
+          "type": "string"
+        },
+        "AccountNumber": {
+          "type": "string"
+        },
+        "AccountType": {
+          "type": "string"
+        },
+        "AllowInternationalPayments": {
+          "type": "string"
+        },
+        "BANK_ID": {
+          "type": "string"
+        },
+        "BankInstruction1Code": {
+          "type": "string"
+        },
+        "BankInstruction2Code": {
+          "type": "string"
+        },
+        "BankInstructionDetails": {
+          "type": "string"
+        },
+        "BankName": {
+          "type": "string"
+        },
+        "BankNumber": {
+          "type": "string"
+        },
+        "BRANCH_ID": {
+          "type": "string"
+        },
+        "BranchName": {
+          "type": "string"
+        },
+        "BranchType": {
+          "type": "string"
+        },
+        "CheckDigit": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Currency": {
+          "type": "string"
+        },
+        "DeliveryChannelCode": {
+          "type": "string"
+        },
+        "EndDate": {
+          "type": "string"
+        },
+        "EXT_BANK_ACCOUNT_ID": {
+          "type": "string"
+        },
+        "IBAN": {
+          "type": "string"
+        },
+        "InstitutionType": {
+          "type": "string"
+        },
+        "InternalOrganization": {
+          "type": "string"
+        },
+        "ListOfStores": {
+          "type": "string"
+        },
+        "OperationType": {
+          "type": "string"
+        },
+        "OwnerName": {
+          "type": "string"
+        },
+        "PARTY_ID": {
+          "type": "string"
+        },
+        "PayeeName": {
+          "type": "string"
+        },
+        "PayGroup": {
+          "type": "string"
+        },
+        "PaymentFormatCode": {
+          "type": "string"
+        },
+        "PaymentReasonCode": {
+          "type": "string"
+        },
+        "PaymentReasonComments": {
+          "type": "string"
+        },
+        "PaymentTextMessage1": {
+          "type": "string"
+        },
+        "Priority": {
+          "type": "string"
+        },
+        "RoutingNumber": {
+          "type": "string"
+        },
+        "SettlementPriority": {
+          "type": "string"
+        },
+        "StartDate": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "TEN_CENT_TEST": {
+          "type": "string"
+        },
+        "UserDefinedAttribute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDefinedAttribute"
+          }
+        },
+        "VENDOR_ID": {
+          "type": "string"
+        }
+      }
+    },
+    "UserDefinedAttribute": {
+      "title": "UserDefinedAttribute",
+      "type": "object",
+      "properties": {
+        "AttributeName": {
+          "type": "string"
+        },
+        "AttributeType": {
+          "type": "string"
+        },
+        "AttributeValue": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateBankInfoResponse": {
+      "title": "UpdateBankInfoResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "ExtBankAccountId": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorCode"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "bank-info-controller",
+      "description": ""
+    }
+  ]
+}
+
