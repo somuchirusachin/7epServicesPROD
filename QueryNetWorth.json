@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Net Worth Data Service API",
+    "description": "This is Net Worth Data Service under Enterprise Service Layer Data Initiatives by 7-Eleven",
+    "contact": {}
+  },
+  "host": "7ep-prod-api.7-eleven.com",
+  "basePath": "/net-worth",
+  "securityDefinitions": {
+    "Subscription-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/{requestId}/{storeNumber}": {
+      "get": {
+        "description": "",
+        "summary": "getNetWorthDetails",
+        "tags": [
+          "net-worth-controller"
+        ],
+        "operationId": "getNetWorthDetails",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "storeNumber",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "schema": {
+              "$ref": "#/definitions/NetWorthResponse"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorCode": {
+      "title": "ErrorCode",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "NetWorthInfo": {
+      "title": "NetWorthInfo",
+      "type": "object",
+      "properties": {
+        "StoreLetterCode": {
+          "type": "string"
+        },
+        "AvailableToDraw": {
+          "type": "string"
+        },
+        "NetWorth": {
+          "type": "string"
+        },
+        "MinimumNetWorth": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "NetWorthResponse": {
+      "title": "NetWorthResponse",
+      "type": "object",
+      "properties": {
+        "ResponseServiceHeader": {
+          "$ref": "#/definitions/ResponseServiceHeader"
+        },
+        "NetWorth": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetWorthInfo"
+          }
+        },
+        "Error": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorCode"
+          }
+        }
+      }
+    },
+    "ResponseServiceHeader": {
+      "title": "ResponseServiceHeader",
+      "type": "object",
+      "properties": {
+        "RequestId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Subscription-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "net-worth-controller",
+      "description": ""
+    }
+  ]
+}
