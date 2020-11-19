@@ -6,7 +6,7 @@
     "description": "This is Get Supplier Data Service under Enterprise Service Layer Data Initiatives by 7-Eleven",
     "contact": {}
   },
-  "host": "7ep-prod-api.7-eleven.com",
+  "host": "7ep-api.7-eleven.com",
   "basePath": "/supplierdata",
   "securityDefinitions": {
     "Subscription-Key": {
