@@ -6,7 +6,7 @@
     "description": "This is Equity Transfer Service under Enterprise Service Layer Initiatives by 7-Eleven",
     "contact": {}
   },
-  "host": "7ep-prod-api.7-eleven.com",
+  "host": "7ep-api.7-eleven.com",
   "basePath": "/equitytransfer",
   "securityDefinitions": {
     "Subscription-Key": {
