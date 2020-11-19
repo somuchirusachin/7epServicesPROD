@@ -6,7 +6,7 @@
     "description": "This service exposes API to get or update supplier's bank info from EBS database",
     "contact": {}
   },
-  "host": "7ep-prod-api.7-eleven.com",
+  "host": "7ep-api.7-eleven.com",
   "basePath": "/bank-info",
   "securityDefinitions": {
     "Subscription-Key": {
