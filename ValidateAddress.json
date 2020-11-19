@@ -6,7 +6,7 @@
     "description": "This service is used to validate address details.",
     "contact": {}
   },
-  "host": "7ep-prod-api.7-eleven.com",
+  "host": "7ep-api.7-eleven.com",
   "basePath": "/address",
   "securityDefinitions": {
     "Subscription-Key": {
